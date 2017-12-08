@@ -16,27 +16,33 @@ public class AdminProductServiceImpl implements AdminProductService {
     @Resource
     private ProductDao productDao;
 
+    @Override
     public Integer countProduct() {
         Integer count = productDao.CountProduct();
         return (count % 8 == 0 ? (count / 8) : (count / 8 + 1));
     }
 
+    @Override
     public void deleteProduct(Product product) {
         productDao.delete(product);
     }
 
+    @Override
     public Product findProduct(Integer pid) {
         return productDao.findOne(pid);
     }
 
+    @Override
     public List<Product> listProduct(Integer page) {
         return productDao.findAll(page);
     }
 
+    @Override
     public void saveProduct(Product product) {
         productDao.save(product);
     }
 
+    @Override
     public void updateProduct(Product product) {
         productDao.update(product);
     }

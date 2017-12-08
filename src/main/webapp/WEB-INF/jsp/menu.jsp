@@ -47,8 +47,8 @@
         <c:forEach items="${sessionScope.cList}" var="c">
             <li>
                 <a href="${ pageContext.request.contextPath }/findByCid/<c:out value="${c.cid}"/>/1">
-                <c:out value="${c.cname}"></c:out>
-            </a>
+                    <c:out value="${c.cname}"></c:out>
+                </a>
             </li>
         </c:forEach>
     </ul>

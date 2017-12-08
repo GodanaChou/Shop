@@ -22,6 +22,7 @@ public class TicketServiceImpl implements TicketService {
     private TicketDao ticketDao;
 
 
+    @Override
     public Integer findTicketByCid(Integer cid) {
         return ticketDao.findTicketByCid(cid);
 //        return ticketDao.get(cid);

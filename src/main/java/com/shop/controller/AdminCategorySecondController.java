@@ -15,6 +15,10 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author ZGY
+ * @Date 2017年12月8日11:32:13
+ */
 @Controller
 public class AdminCategorySecondController {
 
@@ -23,7 +27,13 @@ public class AdminCategorySecondController {
     @Resource
     private AdminCategoryService adminCategoryService;
 
-    //更新二级分类
+    /**
+     *  更新二级分类
+     * @param csid 二级分类ID
+     * @param csname 二级分类名称
+     * @param cid 一级分类ID
+     * @return redirect:/listCategorySecond/1
+     */
     @RequestMapping(value = "/updateCategorySecond", method = RequestMethod.POST)
     public ModelAndView updateCategorySecond(@RequestParam("csid") Integer csid, @RequestParam("csname") String csname,
                                              @RequestParam("cid") Integer cid) {
@@ -36,11 +46,18 @@ public class AdminCategorySecondController {
         return modelAndView;
     }
 
-    //跳转到修改二级分类界面
+
+    /**
+     * 跳转到修改二级分类界面
+     *
+     * @param csid 二级分类ID
+     * @param map 容器
+     * @return
+     */
     @RequestMapping(value = "/gotoEditCategorySecond/{csid}")
     public String gotoEditCategorySecond(@PathVariable("csid") Integer csid,
                                          Map<String, Object> map) {
-        System.out.println("￥￥￥￥￥￥￥￥￥￥￥￥￥" + csid);
+        System.out.println("传入二级分类ID" + csid);
         //查找对应的二级分类
         CategorySecond categorySecond = adminCategorySecondService.findCategorySecond(csid);
         map.put("categorySecond", categorySecond);
@@ -50,7 +67,12 @@ public class AdminCategorySecondController {
         return "admin/categorysecond/edit";
     }
 
-    //删除二级分类
+    /**
+     * 删除二级分类
+     * @param csid 二级分类ID
+     * @param page 页
+     * @return "redirect:/listCategorySecond/" + page
+     */
     @RequestMapping(value = "/deleteCategorySecond/{csid}/{page}")
     public ModelAndView deleteCategorySecond(@PathVariable("csid") Integer csid, @PathVariable("page") Integer page) {
         adminCategorySecondService.deleteCategorySecond(csid);
@@ -58,7 +80,13 @@ public class AdminCategorySecondController {
         return modelAndView;
     }
 
-    //添加二级分类
+    /**
+     * 添加二级分类
+     *
+     * @param csname 二级分类名称
+     * @param cid 一级分类ID
+     * @return redirect:listCategorySecond/1
+     */
     @RequestMapping(value = "/addCategorySecond")
     public ModelAndView addCategorySecond(@RequestParam("csname") String csname, @RequestParam("cid") Integer cid) {
         //查找一级分类对象
@@ -74,7 +102,12 @@ public class AdminCategorySecondController {
         return modelAndView;
     }
 
-    //跳转到添加二级分类的界面
+    /**
+     * 跳转到添加二级分类的界面
+     *
+     * @param map 容器
+     * @return admin/categorysecond/add
+     */
     @RequestMapping(value = "/gotoAddCategorySecond")
     public String gotoAddCategorySecond(Map<String, Object> map) {
         List<Category> categorys = adminCategoryService.findCategory();
@@ -82,7 +115,14 @@ public class AdminCategorySecondController {
         return "admin/categorysecond/add";
     }
 
-    //按分页显示二级分类
+
+    /**
+     * 按分页显示二级分类
+     *
+     * @param page 页
+     * @param map 容器
+     * @return admin/categorysecond/list
+     */
     @RequestMapping(value = "/listCategorySecond/{page}")
     public String listCategorySecond(@PathVariable("page") Integer page, Map<String, Object> map) {
         List<CategorySecond> categorySeconds = adminCategorySecondService.listCategorySecond(page);

@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author ZGY
+ */
 @Controller
 public class UserController {
 
@@ -28,6 +31,7 @@ public class UserController {
     }
 
     //用户退出
+
     @RequestMapping("/quit")
     public String quit(HttpSession session, HttpServletRequest request) {
         request.getSession().invalidate();
@@ -35,6 +39,7 @@ public class UserController {
     }
 
     //用户登录
+
     @RequestMapping(value = "login")
     public String login(@ModelAttribute("user") User user, String checkcode,
                         HttpSession session, Map<String, Object> map) {
@@ -68,12 +73,14 @@ public class UserController {
     }
 
     //跳转到用户登录
+
     @RequestMapping(value = "/userLogin")
     public String userLogin() {
         return "login";
     }
 
     //用户激活
+
     @RequestMapping(value = "/active/{code}")
     public String active(@PathVariable("code") String code, Map<String, Object> map) {
         //根据激活码去查询用户
@@ -91,6 +98,7 @@ public class UserController {
 
     // 用户注册
     // 这里一个@Valid的参数后必须紧挨着一个 BindingResult 参数，否则spring会在校验不通过时直接抛出异常
+
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String register(@ModelAttribute @Valid User user, BindingResult result, HttpSession session,
                            String checkcode, Map<String, Object> map) {
@@ -119,11 +127,12 @@ public class UserController {
             return "regist";
         }
         userService.register(user);
-        
+
         return "msg";
     }
 
     // 使用ajax判断用户是否存在
+
     @RequestMapping(value = "/checkUser/{userName}", method = RequestMethod.POST)
     @ResponseBody
     public String existUser(@PathVariable("userName") String userName, HttpServletResponse response)
@@ -144,6 +153,7 @@ public class UserController {
     }
 
     // 用户注册的跳转
+
     @RequestMapping("userRegister")
     public String register() {
         return "regist";

@@ -15,6 +15,7 @@ public class WalletServiceImpl implements WalletService {
     private WalletDao walletDao;
 
     //修改电子钱包的值
+    @Override
     public void update(Wallet wallet) {
         walletDao.update(wallet);
     }

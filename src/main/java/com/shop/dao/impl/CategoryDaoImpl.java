@@ -12,16 +12,19 @@ import java.util.List;
 @SuppressWarnings("all")
 public class CategoryDaoImpl extends BaseDaoImpl<Category> implements CategoryDao {
 
+    @Override
     public Integer countCategory() {
         String hql = "select count(*) from Category";
         return count(hql);
     }
 
+    @Override
     public List<Category> findAll() {
         String hql = "from Category";
         return find(hql);
     }
 
+    @Override
     public Category findOne(Integer cid) {
         String hql = "from Category c where c.cid = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -29,6 +32,7 @@ public class CategoryDaoImpl extends BaseDaoImpl<Category> implements CategoryDa
         return (Category) query.uniqueResult();
     }
 
+    @Override
     public List<Category> findAll(Integer page) {
         String hql = "from Category";
         int rows = 10;
@@ -36,6 +40,7 @@ public class CategoryDaoImpl extends BaseDaoImpl<Category> implements CategoryDa
         return find(hql, page1, rows);
     }
 
+    @Override
     public Date queryPrivilegeTime(Integer cid) {
         // TODO Auto-generated method stub
         return null;

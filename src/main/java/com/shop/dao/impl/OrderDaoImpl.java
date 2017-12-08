@@ -13,6 +13,7 @@ import java.util.List;
 @SuppressWarnings("all")
 public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 
+    @Override
     public Order findByOid(Integer oid) {
         String hql = "from Order o where o.oid = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -20,6 +21,7 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
         return (Order) query.uniqueResult();
     }
 
+    @Override
     public List<Order> findByPage(int begin, int limit) {
         String hql = "from Order order by ordertime desc";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -27,6 +29,7 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 
     }
 
+    @Override
     public int findCount() {
         String hql = "select count(*) from Order";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -38,6 +41,7 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
         return 0;
     }
 
+    @Override
     public int findCountByUid(Integer uid) {
         String hql = "select count(*) from Order o where o.user.uid = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -49,6 +53,7 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
         return 0;
     }
 
+    @Override
     public List<OrderItem> findOrderItem(Integer oid) {
         String hql = "from OrderItem oi where oi.order.oid = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -60,6 +65,7 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
         return null;
     }
 
+    @Override
     public List<Order> findPageByUid(Integer uid, int begin, int limit) {
         String hql = "from Order o where o.user.uid = ? order by o.ordertime desc";
         Query query = this.getCurrentSession().createQuery(hql);

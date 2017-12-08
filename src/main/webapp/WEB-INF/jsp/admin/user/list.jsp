@@ -8,7 +8,7 @@
 		<script language="javascript" src="${pageContext.request.contextPath}/WEB-INF/js/public.js"></script>
 		
 	</HEAD>
-	<body>
+	<body onload="checkError()">
 		<br>
 		<form id="Form1" name="Form1" action="${pageContext.request.contextPath}/WEB-INF/user/list.jsp" method="post">
 			<table cellSpacing="1" cellPadding="0" width="100%" align="center" bgColor="#f5fafe" border="0">
@@ -62,12 +62,12 @@
 											</td>
 											<td align="center" style="HEIGHT: 22px">
 												<a href="${ pageContext.request.contextPath }/editUser/<c:out value="${u.uid }"/>">
-													<img src="${pageContext.request.contextPath}/WEB-INF/images/i_edit.gif" border="0" style="CURSOR: hand">
+													<img src="${pageContext.request.contextPath}/images/i_edit.gif" border="0" style="CURSOR: hand">
 												</a>
 											</td>
 											<td align="center" style="HEIGHT: 22px">
 												<a href="${ pageContext.request.contextPath }/deleteUser/<c:out value="${u.uid }" />/<c:out value="${page }" />">
-													<img src="${pageContext.request.contextPath}/WEB-INF/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
+													<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
 												</a>
 											</td>
 										</tr>
@@ -92,5 +92,13 @@
 			</table>
 		</form>
 	</body>
+<script>
+	function checkError() {
+       var map ="${error}";
+       if(null != map && map !=""){
+           alert(map);
+	   }
+    }
+</script>
 </HTML>
 

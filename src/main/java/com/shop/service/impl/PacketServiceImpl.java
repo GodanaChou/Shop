@@ -19,6 +19,7 @@ public class PacketServiceImpl implements PacketService {
     @Resource
     private PacketDao packetDao;
 
+    @Override
     public Integer findPacketByUid(Integer uid) {
         return packetDao.findByUid(uid);
     }

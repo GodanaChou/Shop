@@ -18,23 +18,27 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
     final String selecthql = "select p.pid,p.image,p.is_hot,"
             + "p.market_price,p.pdate,p.pdesc,p.pname,p.shop_price ";
 
+    @Override
     public Integer CountPageProductFromCategory(Integer cid) {
         String hql = "select count(*) from Product p, Category c, CategorySecond cs ";
         hql += "where p.categorySecond.csid = cs.csid and cs.category.cid = c.cid and c.cid = ?";
         return count(hql, cid);
     }
 
+    @Override
     public Integer CountPageProductFromCategorySecond(Integer csid) {
         String hql = "select count(*) from Product p ,CategorySecond cs ";
         hql += "where p.categorySecond.csid = cs.csid and cs.csid = ?";
         return count(hql, csid);
     }
 
+    @Override
     public Integer CountProduct() {
         String hql = "select count(*) from Product";
         return count(hql);
     }
 
+    @Override
     public List<Product> findByCategorySecondCategoryCid(Integer cid,
                                                          Integer page) {
         String hql = selecthql + "from Product p,Category c, CategorySecond cs ";
@@ -42,6 +46,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         return Query(cid, page, hql);
     }
 
+    @Override
     public List<Product> findByCategorySecondCsid(Integer csid, Integer page) {
         String hql = selecthql + "from Product p ,CategorySecond cs ";
         hql += "where p.categorySecond.csid = cs.csid and cs.csid = ?";
@@ -78,6 +83,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         return products;
     }
 
+    @Override
     public List<Product> findHot() {
         String hql = "from Product p where p.is_hot = 1 ";
         hql += "order by p.pdate desc";
@@ -85,6 +91,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         return find(hql, 1, rows);
     }
 
+    @Override
     public Product findOne(Integer pid) {
         String hql = "from Product p where p.pid = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -92,6 +99,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         return (Product) query.uniqueResult();
     }
 
+    @Override
     public CategorySecond findOneSecond(Integer csid) {
         String hql = "from CategorySecond p where p.scid = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -99,6 +107,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         return (CategorySecond) query.uniqueResult();
     }
 
+    @Override
     public List<Product> findNew() {
         String hql = "from Product p ";
         hql += "order by p.pdate desc";
@@ -106,6 +115,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao {
         return find(hql, 1, rows);
     }
 
+    @Override
     public List<Product> findAll(Integer page) {
         String hql = "from Product";
         int rows = 12;

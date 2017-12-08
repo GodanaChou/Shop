@@ -65,6 +65,14 @@
 										'订单管理',
 										'${pageContext.request.contextPath}/listOrder/1',
 										'', 'mainFrame');
+                        d.add('0106', '01', 'XXX管理');
+                        d
+                            .add(
+                                '010601',
+                                '0106',
+                                'XX管理',
+                                '${pageContext.request.contextPath}/listOrder/1',
+                                '', 'mainFrame');
 						document.write(d);
 					</script>
 				</div>

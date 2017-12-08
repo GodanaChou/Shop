@@ -11,11 +11,13 @@ import java.util.List;
 @SuppressWarnings("all")
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
+    @Override
     public Integer countUser() {
         String hql = "select count(*) from User";
         return count(hql);
     }
 
+    @Override
     public User findByCode(String code) {
         String hql = "from User u where u.code = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -23,6 +25,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         return (User) query.uniqueResult();
     }
 
+    @Override
     public User findByUsername(String userName) {
         String hql = "from User u where u.username = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -30,6 +33,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         return (User) query.uniqueResult();
     }
 
+    @Override
     public User findByUsernameAndPassword(String username, String password) {
         String hql = "from User u where u.username = ? and u.password = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -38,6 +42,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         return (User) query.uniqueResult();
     }
 
+    @Override
     public List<User> findAll(Integer page) {
         String hql = "from User";
         int rows = 20;
@@ -45,6 +50,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
         return find(hql, page1, rows);
     }
 
+    @Override
     public User findOne(Integer uid) {
         String hql = "from User u where u.uid = ?";
         Query query = this.getCurrentSession().createQuery(hql);

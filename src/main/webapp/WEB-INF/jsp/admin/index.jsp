@@ -12,11 +12,11 @@
 
 <style type="text/css">
 body {
-	color: white;
+	color: black;
 }
 </style>
 </head>
-<body style="background: #278296">
+<body style="background:#c0d2ec">
 	<form method="post"
 		action="${pageContext.request.contextPath }/adminLogin"
 		target="_parent" >

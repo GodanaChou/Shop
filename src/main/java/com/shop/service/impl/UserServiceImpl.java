@@ -17,18 +17,22 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
 
+    @Override
     public User active(String code) {
         return userDao.findByCode(code);
     }
 
+    @Override
     public User findUserByUsernameAndPassword(User user) {
         return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 
+    @Override
     public User existUser(String userName) {
         return userDao.findByUsername(userName);
     }
 
+    @Override
     public void register(User user) {
         user.setState(1);
         String code = UUIDUtils.getUUID() + UUIDUtils.getUUID();
@@ -38,11 +42,13 @@ public class UserServiceImpl implements UserService {
         MailUitls.sendMail(user.getEmail(), code);
     }
 
+    @Override
     public void update(User user) {
         userDao.update(user);
 
     }
 
+    @Override
     public User findByUid(Integer uid) {
         return userDao.findOne(uid);
     }

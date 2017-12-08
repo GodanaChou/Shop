@@ -5,30 +5,68 @@ import com.shop.model.Category;
 import java.util.List;
 
 /**
- * @author Joryun
+ * @author ZGY
  * @ClassName: AdminCategoryService
  * @Description: 商品类别服务
- * @date 2016年11月29日 下午7:43:30
+ * @date 2017年12月8日10:24:32
  */
 public interface AdminCategoryService {
 
-    // 分页查询一级分类
-    public List<Category> listCategory(Integer page);
 
-    // 查询一级分类的页数
-    public Integer countCategory();
+    /**
+     * 分页查询一级分类
+     *
+     * @param page 页
+     * @return List<Category>
+     */
+     List<Category> listCategory(Integer page);
 
-    //添加二级分类
-    public void addCategory(Category category);
 
-    //删除二级分类
-    public void deleteCategory(Integer cid);
 
-    //查询某个具体的一级分类
-    public Category findCategory(Integer cid);
+    /**
+     * 查询一级分类的页数
+     *
+     * @return  Integer page = (count % 10 == 0 ? (count / 10) : (count / 10 + 1))
+     */
+     Integer countCategory();
 
-    //更新一级分类
-    public void updateCategory(Category category);
 
-    public List<Category> findCategory();
+
+    /**
+     * 添加一级分类
+     *
+     * @param category 分类
+     */
+    void addCategory(Category category);
+
+
+    /**
+     * 删除一级分类
+     *
+     * @param cid 分类ID cid
+     */
+    void deleteCategory(Integer cid);
+
+
+    /**
+     * 查询某个具体的一级分类
+     *
+     * @param cid 分类ID cid
+     * @return 一级分类信息Category
+     */
+    Category findCategory(Integer cid);
+
+
+    /**
+     * 更新一级分类
+     *
+     * @param category 一级分类category
+     */
+    void updateCategory(Category category);
+
+    /**
+     * 查询所有一级分类
+     * @return List<Category>
+     */
+    List<Category> findCategory();
 }

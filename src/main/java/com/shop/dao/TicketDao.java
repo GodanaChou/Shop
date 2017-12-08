@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface TicketDao extends BaseDao<Ticket> {
 
+    @Override
     public Integer findTicketByCid(Integer cid);
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,11 @@ public class AdminController {
         }
     }
 
-    //更新用户
+    /**
+     * 更新user
+     * @param user user
+     * @return redirect:/listUser/1
+     */
     @RequestMapping(value = "/updateUser")
     public ModelAndView updateUser(@ModelAttribute("user") User user) {
         adminService.updateUser(user);
@@ -36,7 +42,14 @@ public class AdminController {
         return model;
     }
 
-    //修改用户
+    /**
+     * 修改用户
+     *
+     * @param uid 用户ID
+     * @param user user
+     * @param map  Map<String, Object>
+     * @return
+     */
     @RequestMapping(value = "/editUser/{uid}")
     public String editUser(@PathVariable("uid") Integer uid, @ModelAttribute("user") User user, Map<String, Object>
             map) {
@@ -48,22 +61,31 @@ public class AdminController {
     //删除用户 uid:用户的id page:当前第几页
     @RequestMapping(value = "/deleteUser/{uid}/{page}")
     public ModelAndView deleteUser(@PathVariable("uid") Integer uid, @PathVariable("page") Integer page) {
-        adminService.deleteUser(uid);
         ModelAndView model = new ModelAndView();
-        model.setViewName("redirect:/listUser/" + page);
+        try {
+            adminService.deleteUser(uid);
+        }catch (Exception e){
+            String error = "该用户存在过活动,不能删除";
+            model.addObject("error",error);
+        }
+
+        model.setViewName("redirect:/listUser/" + page );
         return model;
     }
 
     //管理员查询用户
     @RequestMapping(value = "/listUser/{page}")
-    public String listUser(@PathVariable("page") Integer page, Map<String, Object> map) {
+    public String listUser(@PathVariable("page") Integer page, Map<String, Object> map,
+                           HttpServletRequest request, HttpServletResponse response) {
         //保存所有用户的集合
         List<User> users = adminService.findUser(page);
+        String error = request.getParameter("error");
         //查询用多少页
         Integer count = adminService.countUser();
         map.put("count", count);
         map.put("page", page);
         map.put("users", users);
+        map.put("error",error);
         return "admin/user/list";
     }
 

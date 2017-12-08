@@ -10,6 +10,7 @@ import com.shop.model.Admin;
 @SuppressWarnings("all")
 public class AdminDaoImpl extends BaseDaoImpl<Admin> implements AdminDao {
 
+    @Override
     public Admin findByAdminnameAndPassword(String username, String password) {
         String hql = "from Admin a where a.username = ? and a.password = ?";
         Query query = this.getCurrentSession().createQuery(hql);
@@ -18,6 +19,7 @@ public class AdminDaoImpl extends BaseDaoImpl<Admin> implements AdminDao {
         return (Admin) query.uniqueResult();
     }
 
+    @Override
     public Admin findOne(Integer uid) {
         String hql = "from Admin where uid=?";
         Query query = this.getCurrentSession().createQuery(hql);

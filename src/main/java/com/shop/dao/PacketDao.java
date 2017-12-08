@@ -13,5 +13,6 @@ public interface PacketDao extends BaseDao<Packet> {
      * @param uid
      * @return
      */
+    @Override
     public Integer findByUid(Integer uid);
 }

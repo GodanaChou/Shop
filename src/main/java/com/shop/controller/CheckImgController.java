@@ -25,7 +25,8 @@ public class CheckImgController {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
         // 步骤二 图片绘制背景颜色 ---通过绘图对象
-        Graphics graphics = bufferedImage.getGraphics();// 得到画图对象 --- 画笔
+        Graphics graphics = bufferedImage.getGraphics();
+        // 得到画图对象 --- 画笔
         // 绘制任何图形之前 都必须指定一个颜色
         graphics.setColor(getRandColor(200, 250));
         graphics.fillRect(0, 0, width, height);
@@ -41,7 +42,8 @@ public class CheckImgController {
 
         String words = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 
-        Random random = new Random();// 生成随机数
+        Random random = new Random();
+        // 生成随机数
         // 定义StringBuffer
         StringBuffer sb = new StringBuffer();
 
@@ -56,7 +58,8 @@ public class CheckImgController {
             // 换算弧度
             double theta = jiaodu * Math.PI / 180;
             // 生成一个随机数字
-            int index = random.nextInt(words.length()); // 生成随机数 0 到 length - 1
+            int index = random.nextInt(words.length());
+            // 生成随机数 0 到 length - 1
             // 获得字母数字
             char c = words.charAt(index);
             sb.append(c);
@@ -67,7 +70,8 @@ public class CheckImgController {
             x += 30;
         }
         // 将生成的字母存入到session中
-        session.setAttribute("checkcode", sb.toString());   //TODO
+        session.setAttribute("checkcode", sb.toString());
+        //TODO
 
         // 步骤五 绘制干扰线
         graphics.setColor(getRandColor(160, 200));

@@ -16,32 +16,39 @@ public class AdminCategorySecondServiceImpl implements AdminCategorySecondServic
     @Resource
     private CategorySecondDao categorySecondDao;
 
+    @Override
     public void addCategorySecond(CategorySecond categorySecond) {
         categorySecondDao.save(categorySecond);
     }
 
+    @Override
     public void deleteCategorySecond(Integer csid) {
         categorySecondDao.delete(csid);
     }
 
+    @Override
     public void updateCategorySecond(CategorySecond categorySecond) {
         categorySecondDao.update(categorySecond);
     }
 
+    @Override
     public Integer countCategorySecond() {
         Integer count = categorySecondDao.countCategorySecond();
         return (count % 15 == 0 ? (count / 15) : (count / 15 + 1));
     }
 
 
+    @Override
     public CategorySecond findCategorySecond(Integer csid) {
         return categorySecondDao.findOne(csid);
     }
 
+    @Override
     public List<CategorySecond> listCategorySecond(Integer page) {
         return categorySecondDao.findAll(page);
     }
 
+    @Override
     public List<CategorySecond> listCategorySecond() {
         return categorySecondDao.findAll();
     }

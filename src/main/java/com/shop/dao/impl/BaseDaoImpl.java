@@ -42,37 +42,45 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return clz;
     }
 
+    @Override
     public Serializable save(T o) {
 
         return this.getCurrentSession().save(o);
     }
 
+    @Override
     public void saveOrUpdate(T o) {
         this.getCurrentSession().saveOrUpdate(o);
     }
 
+    @Override
     public void update(T o) {
         this.getCurrentSession().update(o);
     }
 
+    @Override
     public void delete(T o) {
         this.getCurrentSession().delete(o);
     }
 
+    @Override
     public void delete(Serializable id) {
         T o = this.get(id);
         this.getCurrentSession().delete(o);
     }
 
+    @Override
     public T get(Serializable id) {
         return (T) this.getCurrentSession().get(getClz(), id);
     }
 
+    @Override
     public List<T> find(String hql) {
         Query q = this.getCurrentSession().createQuery(hql);
         return q.list();
     }
 
+    @Override
     public List<T> find(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
         if (params != null && !params.isEmpty()) {
@@ -83,6 +91,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return q.list();
     }
 
+    @Override
     public List<T> find(String hql, Map<String, Object> params, int page, int rows) {
         Query q = this.getCurrentSession().createQuery(hql);
         if (params != null && !params.isEmpty()) {
@@ -93,11 +102,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
     }
 
+    @Override
     public List<T> find(String hql, int page, int rows) {
         Query q = this.getCurrentSession().createQuery(hql);
         return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
     }
 
+    @Override
     public Integer count(String hql) {
         Query q = sessionFactory.getCurrentSession().createQuery(hql);
         List cc = q.list();
@@ -105,6 +116,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return a.intValue();
     }
 
+    @Override
     public Integer count(String hql, Integer id) {
         Query q = sessionFactory.getCurrentSession().createQuery(hql);
         q.setParameter(0, id);
@@ -113,6 +125,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return a.intValue();
     }
 
+    @Override
     public Integer count(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
         if (params != null && !params.isEmpty()) {
@@ -123,11 +136,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return (Integer) q.uniqueResult();
     }
 
+    @Override
     public int executeHql(String hql) {
         Query q = this.getCurrentSession().createQuery(hql);
         return q.executeUpdate();
     }
 
+    @Override
     public int executeHql(String hql, Map<String, Object> params) {
         Query q = this.getCurrentSession().createQuery(hql);
         if (params != null && !params.isEmpty()) {
@@ -138,11 +153,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return q.executeUpdate();
     }
 
+    @Override
     public Integer findByUid(Integer uid) {
         // TODO Auto-generated method stub
         return null;
     }
 
+    @Override
     public Integer findTicketByCid(Integer cid) {
         // TODO Auto-generated method stub
         return null;

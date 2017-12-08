@@ -16,6 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Resource
     private CategoryDao categoryDao;
 
+    @Override
     public List<Category> getCategory() {
         return categoryDao.findAll();
     }
