@@ -2,6 +2,7 @@ package com.shop.controller;
 
 import com.shop.model.User;
 import com.shop.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -30,11 +31,14 @@ public class UserController {
         return new User();
     }
 
+    private static Logger logger=Logger.getLogger("UserControllerLog");
+
     //用户退出
 
     @RequestMapping("/quit")
     public String quit(HttpSession session, HttpServletRequest request) {
         request.getSession().invalidate();
+        logger.info("用户"+request.getParameter("username")+"退出登录");
         return "redirect:index";
     }
 
@@ -46,9 +50,15 @@ public class UserController {
         //从session中获取验证码
         String checkCode = (String) session.getAttribute("checkcode");
         //如果验证码不一致，直接返回到登陆的页面
-        if (!checkCode.equalsIgnoreCase(checkcode)) {
-            map.put("errorCheckCode", "errorCheckCode");
-            return "login";
+        try {
+            if (!checkCode.equalsIgnoreCase(checkcode)) {
+                map.put("errorCheckCode", "errorCheckCode");
+
+                return "login";
+            }
+        }catch (Exception e){
+                map.put("errorCheckCode2", "errorCheckCode2");
+                return "login";
         }
         //判断是否存在用户
         User isExistUser = userService.existUser(user.getUsername());
@@ -60,6 +70,11 @@ public class UserController {
         User u = userService.existUser(user.getUsername());
         if (u.getState() == 0) {
             map.put("notActive", "notActive");
+            logger.info("未激活用户"+user.getUsername()+"尝试登录");
+            return "login";
+        } else  if (u.getState() == 2){
+            map.put("frost","frost");
+            logger.info("冻结用户"+user.getUsername()+"尝试登录");
             return "login";
         }
         //判断用户名和密码是否都正确
@@ -69,6 +84,7 @@ public class UserController {
             return "login";
         }
         session.setAttribute("user", u);
+        logger.info("用户"+u.getUsername()+"登录成功");
         return "redirect:index";
     }
 
@@ -93,6 +109,7 @@ public class UserController {
         user.setState(1);
         userService.update(user);
         map.put("activeSuccess", "activeSuccess");
+        logger.info("激活码激活成功");
         return "msg";
     }
 
@@ -127,6 +144,7 @@ public class UserController {
             return "regist";
         }
         userService.register(user);
+        logger.info(user.getName()+"注册成功");
 
         return "msg";
     }

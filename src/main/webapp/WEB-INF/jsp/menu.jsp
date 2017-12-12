@@ -27,7 +27,7 @@
                 </li>
                 <li id="headerRegister" class="headerRegister"
                     style="display: list-item;">
-                    <a href="${ pageContext.request.contextPath }/quit">退出</a>|
+                    <a href="${ pageContext.request.contextPath }/quit?username=${user.username }">退出</a>|
                 </li>
             </c:if>
 

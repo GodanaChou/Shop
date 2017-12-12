@@ -58,7 +58,14 @@ public class AdminController {
         return "admin/user/edit";
     }
 
-    //删除用户 uid:用户的id page:当前第几页
+
+    /**
+     * 删除用户
+     *
+     * @param uid 用户的id
+     * @param page 当前第几页
+     * @return redirect:/listUser/ + page
+     */
     @RequestMapping(value = "/deleteUser/{uid}/{page}")
     public ModelAndView deleteUser(@PathVariable("uid") Integer uid, @PathVariable("page") Integer page) {
         ModelAndView model = new ModelAndView();
@@ -73,7 +80,16 @@ public class AdminController {
         return model;
     }
 
-    //管理员查询用户
+
+    /**
+     * 管理员查询用户
+     *
+     * @param page 当前第几页
+     * @param map 容器
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @return admin/user/list
+     */
     @RequestMapping(value = "/listUser/{page}")
     public String listUser(@PathVariable("page") Integer page, Map<String, Object> map,
                            HttpServletRequest request, HttpServletResponse response) {
@@ -89,7 +105,13 @@ public class AdminController {
         return "admin/user/list";
     }
 
-    // 处理管理员登陆
+
+    /**
+     *  处理管理员登陆
+     * @param admin 管理类
+     * @param session HttpSession
+     * @return admin/home
+     */
     @RequestMapping(value = "/adminLogin", method = RequestMethod.POST)
     public String adminLogin(Admin admin,
                              HttpSession session) {

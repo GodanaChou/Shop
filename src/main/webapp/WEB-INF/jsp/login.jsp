@@ -66,13 +66,16 @@
 									<th>用户名:</th>
 									<td><form:input path="username" name="username" id="username"
 										class="text" maxlength="20" />
-										<%--
+
 										<c:if test="${notUser != null }">
 										    <font color="red">没有此用户</font>
 										</c:if>
-										--%>
+
 										<c:if test="${notActive != null }">
 										    <font color="red">此用户还没有激活</font>
+										</c:if>
+										<c:if test="${frost != null }">
+											<font color="red">此用户已被冻结</font>
 										</c:if>
 									</td>
 								</tr>
@@ -98,7 +101,10 @@
 											src="${pageContext.request.contextPath}/getCheckCodeImage" title="点击更换验证码"/>
 										</span>
 										<c:if test="${errorCheckCode != null}">
-										    <font color="red">验证码出错</font>
+										    <font color="red">验证码错误</font>
+										</c:if>
+										<c:if test="${errorCheckCode2 != null}">
+											<font color="red">验证码不能为空</font>
 										</c:if>
 									</td>
 								</tr>
